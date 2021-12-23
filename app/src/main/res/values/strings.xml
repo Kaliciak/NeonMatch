@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Neon Match</string>
+    <string name="title">NEON MATCH</string>
+    <string name="play">PLAY</string>
 </resources>
