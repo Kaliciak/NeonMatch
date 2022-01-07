@@ -1,4 +1,4 @@
-package com.kaliciak.neonmatch
+package com.kaliciak.neonmatch.view.views
 
 import android.content.Context
 import android.graphics.Canvas
@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.kaliciak.neonmatch.R
 
 class TestView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

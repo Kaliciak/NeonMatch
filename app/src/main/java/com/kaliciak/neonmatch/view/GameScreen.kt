@@ -1,9 +1,11 @@
-package com.kaliciak.neonmatch
+package com.kaliciak.neonmatch.view
 
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kaliciak.neonmatch.databinding.ActivityGameScreenBinding
+import com.kaliciak.neonmatch.model.BlockFabric
+import com.kaliciak.neonmatch.model.Board
 
 private lateinit var binding: ActivityGameScreenBinding
 
@@ -15,7 +17,6 @@ class GameScreen : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-//        binding.testView.size = 100f
-
+        binding.boardView.board = Board(6, 3, BlockFabric())
     }
 }

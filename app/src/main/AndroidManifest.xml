@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NeonMatch">
         <activity
-            android:name=".GameScreen"
+            android:name=".view.GameScreen"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

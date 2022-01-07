@@ -8,4 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="temporary_purple">#A535BC</color>
+    <color name="blockRed">#A30000</color>
+    <color name="blockGreen">#00A300</color>
+    <color name="blockBlue">#0000A3</color>
 </resources>
