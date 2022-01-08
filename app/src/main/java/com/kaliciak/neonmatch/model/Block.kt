@@ -1,7 +1,5 @@
 package com.kaliciak.neonmatch.model
 
-import android.graphics.Color
-
-class Block(val type: BlockType) {
-
+enum class Block {
+    RED, GREEN, BLUE, YELLOW, ORANGE, CYAN
 }

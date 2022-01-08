@@ -11,4 +11,7 @@
     <color name="blockRed">#A30000</color>
     <color name="blockGreen">#00A300</color>
     <color name="blockBlue">#0000A3</color>
+    <color name="blockYellow">#A3A300</color>
+    <color name="blockOrange">#A36700</color>
+    <color name="blockCyan">#00A3A3</color>
 </resources>
