@@ -10,23 +10,42 @@ class GameScreenViewModel {
 
     var firstBlockCoords: Pair<Int, Int>? = null
     var lastBlockCoords: Pair<Int, Int>? = null
+    var touchedBlocks: MutableList<Pair<Int, Int>> = mutableListOf()
 
     lateinit var delegate: GameScreen
 
     fun pressedBlock(blockCoords: Pair<Int, Int>) {
+        touchedBlock(blockCoords)
+
         if (board.validateBlockCoords(blockCoords)) {
             firstBlockCoords = blockCoords
         }
     }
 
     fun releasedBlock(blockCoords: Pair<Int, Int>) {
+        touchedBlock(blockCoords)
+
         if (board.validateBlockCoords(blockCoords) && firstBlockCoords != null) {
             lastBlockCoords = blockCoords
 
             board.swapBlocks(firstBlockCoords!!, lastBlockCoords!!)
-            delegate.refreshBoardView()
         }
         firstBlockCoords = null
         lastBlockCoords = null
+        touchedBlocks.clear()
+        delegate.refreshBoardView()
+    }
+
+    fun touchedBlock(blockCoords: Pair<Int, Int>) {
+        if (touchedBlocks.isEmpty()) {
+            touchedBlocks.add(blockCoords)
+        }
+        else {
+            val lastBlock = touchedBlocks.last()
+            if (lastBlock != blockCoords) {
+                touchedBlocks.add(blockCoords)
+            }
+        }
+        delegate.refreshBoardView()
     }
 }

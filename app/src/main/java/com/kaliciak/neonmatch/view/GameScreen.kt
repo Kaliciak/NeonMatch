@@ -27,9 +27,16 @@ class GameScreen : AppCompatActivity() {
         viewModel.delegate = this
 
         binding.boardView.viewDelegate = this
+        binding.boardView.dataProvider = this
         binding.boardView.board = viewModel.board
+    }
 
+    fun getBoard(): Board {
+        return viewModel.board
+    }
 
+    fun getTouchedBlocks(): List<Pair<Int, Int>> {
+        return viewModel.touchedBlocks.toList()
     }
 
     fun refreshBoardView() {
@@ -43,5 +50,9 @@ class GameScreen : AppCompatActivity() {
 
     fun releasedBlock(blockCoords: Pair<Int, Int>) {
         viewModel.releasedBlock(blockCoords)
+    }
+
+    fun touchedBlock(blockCoords: Pair<Int, Int>) {
+        viewModel.touchedBlock(blockCoords)
     }
 }
