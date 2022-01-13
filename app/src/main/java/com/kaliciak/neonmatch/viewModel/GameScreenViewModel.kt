@@ -1,11 +1,12 @@
 package com.kaliciak.neonmatch.viewModel
 
-import com.kaliciak.neonmatch.model.BlockFabric
 import com.kaliciak.neonmatch.model.Board
+import com.kaliciak.neonmatch.model.BoardFabric
 import com.kaliciak.neonmatch.view.GameScreen
 
 class GameScreenViewModel {
-    var board = Board(6, 6, BlockFabric())
+    private val boardFabric = BoardFabric(6, 8, 6)
+    var board: Board
         private set
 
     var firstBlockCoords: Pair<Int, Int>? = null
@@ -13,6 +14,10 @@ class GameScreenViewModel {
     var touchedBlocks: MutableList<Pair<Int, Int>> = mutableListOf()
 
     lateinit var delegate: GameScreen
+
+    init {
+        board = boardFabric.newBoard()
+    }
 
     fun pressedBlock(blockCoords: Pair<Int, Int>) {
         touchedBlock(blockCoords)
