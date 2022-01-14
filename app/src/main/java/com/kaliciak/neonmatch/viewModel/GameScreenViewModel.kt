@@ -9,9 +9,7 @@ class GameScreenViewModel {
     var board: Board
         private set
 
-    var firstBlockCoords: Pair<Int, Int>? = null
-    var lastBlockCoords: Pair<Int, Int>? = null
-    var touchedBlocks: MutableList<Pair<Int, Int>> = mutableListOf()
+    var blockPath: MutableList<Pair<Int, Int>> = mutableListOf()
 
     lateinit var delegate: GameScreen
 
@@ -19,38 +17,35 @@ class GameScreenViewModel {
         board = boardFabric.newBoard()
     }
 
-    fun pressedBlock(blockCoords: Pair<Int, Int>) {
-        touchedBlock(blockCoords)
-
-        if (board.validateBlockCoords(blockCoords)) {
-            firstBlockCoords = blockCoords
-        }
-    }
-
     fun releasedBlock(blockCoords: Pair<Int, Int>) {
         touchedBlock(blockCoords)
 
-        if (board.validateBlockCoords(blockCoords) && firstBlockCoords != null) {
-            lastBlockCoords = blockCoords
-
-            board.swapBlocks(firstBlockCoords!!, lastBlockCoords!!)
+        // Released in proper area and touched more than 2 blocks
+        if (blockPath.last() == blockCoords && blockPath.size >= 2) {
+            board.swapBlocks(blockPath.first(), blockPath.last())
         }
-        firstBlockCoords = null
-        lastBlockCoords = null
-        touchedBlocks.clear()
+        blockPath.clear()
         delegate.refreshBoardView()
     }
 
     fun touchedBlock(blockCoords: Pair<Int, Int>) {
-        if (touchedBlocks.isEmpty()) {
-            touchedBlocks.add(blockCoords)
+        if (!board.validateBlockCoords(blockCoords)) {
+            return
         }
-        else {
-            val lastBlock = touchedBlocks.last()
-            if (lastBlock != blockCoords) {
-                touchedBlocks.add(blockCoords)
-            }
+
+        if (blockPath.contains(blockCoords)) {
+            blockPath = blockPath.subList(0, blockPath.indexOf(blockCoords))
+        }
+        if (blockPath.isEmpty() || areNeighbours(blockPath.last(), blockCoords)) {
+            blockPath.add(blockCoords)
         }
         delegate.refreshBoardView()
+    }
+
+    private fun areNeighbours(blockA: Pair<Int, Int>, blockB: Pair<Int, Int>): Boolean {
+        return (blockA.first == blockB.first + 1 && blockA.second == blockB.second) ||
+                (blockA.first == blockB.first - 1 && blockA.second == blockB.second) ||
+                (blockA.first == blockB.first && blockA.second == blockB.second + 1) ||
+                (blockA.first == blockB.first && blockA.second == blockB.second - 1)
     }
 }

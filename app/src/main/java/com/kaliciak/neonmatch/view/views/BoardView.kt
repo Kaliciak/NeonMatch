@@ -75,11 +75,6 @@ class BoardView @JvmOverloads constructor(
         super.onTouchEvent(event)
 
         when (event?.action) {
-           MotionEvent.ACTION_DOWN -> {
-               val blockCoords = getBlockCoords(Pair(event.x, event.y))
-               viewDelegate.pressedBlock(blockCoords)
-           }
-
            MotionEvent.ACTION_MOVE -> {
                val blockCoords = getBlockCoords(Pair(event.x, event.y))
                viewDelegate.touchedBlock(blockCoords)
