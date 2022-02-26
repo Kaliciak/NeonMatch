@@ -97,6 +97,7 @@ class BoardView @JvmOverloads constructor(
             Block.YELLOW -> ContextCompat.getColor(context, R.color.blockYellow)
             Block.ORANGE -> ContextCompat.getColor(context, R.color.blockOrange)
             Block.CYAN -> ContextCompat.getColor(context, R.color.blockCyan)
+            Block.PURPLE -> ContextCompat.getColor(context, R.color.blockPurple)
 //            else -> ContextCompat.getColor(context, R.color.white)
         }
         return Paint(0).apply { color = blockColor }

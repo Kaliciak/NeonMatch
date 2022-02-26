@@ -17,12 +17,20 @@ class GameScreenViewModel {
         board = boardFabric.newBoard()
     }
 
+    fun movePath() {
+        var firstBlock = blockPath.first()
+        for(block in blockPath) {
+            board.swapBlocks(firstBlock, block)
+            firstBlock = block
+        }
+    }
+
     fun releasedBlock(blockCoords: Pair<Int, Int>) {
         touchedBlock(blockCoords)
 
         // Released in proper area and touched more than 2 blocks
         if (blockPath.last() == blockCoords && blockPath.size >= 2) {
-            board.swapBlocks(blockPath.first(), blockPath.last())
+            movePath()
         }
         blockPath.clear()
         delegate.refreshBoardView()
